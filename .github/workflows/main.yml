@@ -5,6 +5,10 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      GOOD_HASH: "e4cfc6f77ebbe2e23550ddab682316ab4ce1c03c"
+      BAD_HASH: "HEAD"
+
 
     steps:
       - uses: actions/checkout@v3
@@ -19,5 +23,5 @@ jobs:
       - name: Install packages
         run: pip install -r requirements.txt
 
-      - name: Run tests
-        run: python manage.py test
+      - name: Run git bisect to find bad commit
+        run: python myscript.py
